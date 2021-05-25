@@ -18,8 +18,14 @@ A Flutter project.
 8. View net expense/income (responsive as per sorting via categories)
 
 ## List of non-implemented/planned features
-1. Statistics based time period as time stamp property not yet defined for transaction model
-2. Implemented a basic UI without creative design
+* Non-implemented features
+    1. Statistics based time period as time stamp property not yet defined for transaction model
+    2. Implemented a basic UI without creative design
+* Planned features
+    1. Planning to add datetime stamp in transaction data model 
+    2. Feature to edit transaction details
+    3. Visulalization using graphs
+    4. Improving UI/UX of the application
 
 ## List of known bugs
 1. Renderflow may occur in few devices
