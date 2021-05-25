@@ -25,8 +25,8 @@ A Flutter project.
 1. Renderflow may occur in few devices
 
 ## References used
-Bloc Reference: https://www.youtube.com/watch?v=w6XWjpBK4W8&list=PLptHs0ZDJKt_T-oNj_6Q98v-tBnVf-S_o
-Hive Reference: https://www.youtube.com/watch?v=R1GSrrItqUs&t=1522s
+* Bloc Reference: https://www.youtube.com/watch?v=w6XWjpBK4W8&list=PLptHs0ZDJKt_T-oNj_6Q98v-tBnVf-S_o
+* Hive Reference: https://www.youtube.com/watch?v=R1GSrrItqUs&t=1522s
 
 ## Screenshots / Recording of the app
 Screenshots are included in folder named as "screenshots".
@@ -35,6 +35,6 @@ Screenshots are included in folder named as "screenshots".
 OS: Windows
 
 ## Design Tools used
-N/A#   
+N/A
  
  
