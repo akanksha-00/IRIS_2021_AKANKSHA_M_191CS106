@@ -1,16 +1,40 @@
-# money_manage_project
+# money_management
 
-A new Flutter project.
+A Flutter project.
 
-## Getting Started
+## List of implemented features:
+1. Implemented Bloc Architecture for State Management
+2. Authentication using Firebase Authentication Services (Email and Password)
+3. Implemented Hive for local storage
+4. Add transaction where each transaction consists of:
+    i. title
+    ii. description
+    iii. category
+    iv. expense/income
+    v. amount
+5. Delete single/all transactions
+6. Add category
+7. Sort transactions as per category
+8. View net expense/income (responsive as per sorting via categories)
 
-This project is a starting point for a Flutter application.
+## List of non-implemented/planned features
+1. Statistics based time period as time stamp property not yet defined for transaction model
+2. Implemented a basic UI without creative design
 
-A few resources to get you started if this is your first Flutter project:
+## List of known bugs
+1. Renderflow may occur in few devices
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+## References used
+Bloc Reference: https://www.youtube.com/watch?v=w6XWjpBK4W8&list=PLptHs0ZDJKt_T-oNj_6Q98v-tBnVf-S_o
+Hive Reference: https://www.youtube.com/watch?v=R1GSrrItqUs&t=1522s
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## Screenshots / Recording of the app
+Screenshots are included in folder named as "screenshots".
+
+## Operating System used
+OS: Windows
+
+## Design Tools used
+N/A#   
+ 
+ 
