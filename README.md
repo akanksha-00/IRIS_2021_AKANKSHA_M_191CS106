@@ -7,11 +7,11 @@ A Flutter project.
 2. Authentication using Firebase Authentication Services (Email and Password)
 3. Implemented Hive for local storage
 4. Add transaction where each transaction consists of:
-    i. title
-    ii. description
-    iii. category
-    iv. expense/income
-    v. amount
+    1. title
+    2. description
+    3. category
+    4. expense/income
+    5. amount
 5. Delete single/all transactions
 6. Add category
 7. Sort transactions as per category
