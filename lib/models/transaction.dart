@@ -14,13 +14,17 @@ class Transaction {
   bool expense;
   @HiveField(4)
   double amount;
+  @HiveField(5)
+  DateTime dateTime;
 
-  Transaction(
-      {required this.title,
-      required this.description,
-      required this.category,
-      required this.amount,
-      required this.expense});
+  Transaction({
+    required this.title,
+    required this.description,
+    required this.category,
+    required this.amount,
+    required this.expense,
+    required this.dateTime,
+  });
 }
 
 @HiveType(typeId: 1)

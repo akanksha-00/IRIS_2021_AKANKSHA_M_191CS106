@@ -12,6 +12,7 @@ A Flutter project.
     3. category
     4. expense/income
     5. amount
+    6. dateTime
 5. Delete single/all transactions
 6. Add category
 7. Sort transactions as per category
@@ -19,16 +20,16 @@ A Flutter project.
 
 ## List of non-implemented/planned features
 * Non-implemented features
-    1. Statistics based time period as time stamp property not yet defined for transaction model
+    1. Statistics based on daily/monthly/yearly transactions
     2. Implemented a basic UI without creative design
 * Planned features
-    1. Planning to add datetime stamp in transaction data model 
-    2. Feature to edit transaction details
-    3. Visulalization using graphs
-    4. Improving UI/UX of the application
+    1. Feature to edit transaction details
+    2. Visulalization using graphs
+    3. Improving UI/UX of the application
 
 ## List of known bugs
 1. Renderflow may occur in few devices
+
 
 ## References used
 * Bloc Reference: https://www.youtube.com/watch?v=w6XWjpBK4W8&list=PLptHs0ZDJKt_T-oNj_6Q98v-tBnVf-S_o

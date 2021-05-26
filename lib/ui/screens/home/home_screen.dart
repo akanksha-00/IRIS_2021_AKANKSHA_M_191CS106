@@ -56,66 +56,135 @@ class HomeScreen extends StatelessWidget {
       },
       child: Scaffold(
         drawer: Drawer(
-          child: ListView(
-            children: [
-              ListTile(
-                title: Text('Add Transaction'),
-                onTap: () {
-                  Navigator.of(context).pop();
-                  showDialog(
-                      context: context,
-                      builder: (
-                        BuildContext _,
-                      ) {
-                        //print(categoryList);
-                        return addTransactionWidget(
-                            context, addTransaction, categoryList, _);
-                      });
-                },
-              ),
-              ListTile(
-                onTap: () {
-                  Navigator.of(context).pop();
-                  transactionBloc.add(DeleteAllTransactions());
-                },
-                title: Text('Delete All'),
-              ),
-              ListTile(
-                onTap: () {
-                  Navigator.of(context).pop();
-                  showDialog(
-                      context: context,
-                      builder: (
-                        BuildContext _,
-                      ) {
-                        return addCategoryWidget(context, addCategory, _);
-                      });
-                },
-                title: Text('Add Category'),
-              ),
-              ListTile(
-                onTap: () {
-                  Navigator.of(context).pop();
-                  showDialog(
-                      context: context,
-                      builder: (
-                        BuildContext _,
-                      ) {
-                        return selectCategoryWidget(
-                            context,
-                            categoryList,
-                            transactionBloc.selectedCategory,
-                            height,
-                            width,
-                            selectCategory);
-                      });
-                },
-                title: Text('Select Category'),
-              ),
-            ],
+          child: Container(
+            color: Colors.teal[600],
+            child: ListView(
+              children: [
+                Container(
+                  color: Colors.redAccent,
+                  padding: EdgeInsets.fromLTRB(20.0, 40.0, 20.0, 40.0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      Icon(
+                        Icons.money,
+                        size: 90.0,
+                        color: Colors.teal[600],
+                      ),
+                      Text(
+                        'Welcome!',
+                        style: TextStyle(
+                            fontSize: 30.0, fontWeight: FontWeight.bold),
+                      ),
+                    ],
+                  ),
+                ),
+                SizedBox(
+                  height: 20.0,
+                ),
+                Container(
+                  child: Column(
+                    children: [
+                      ListTile(
+                        title: Text(
+                          'Add Transaction',
+                          style: TextStyle(fontSize: 18.0, color: Colors.white),
+                        ),
+                        leading: Icon(
+                          Icons.add,
+                          color: Colors.grey[300],
+                        ),
+                        onTap: () {
+                          Navigator.of(context).pop();
+                          showDialog(
+                              context: context,
+                              builder: (
+                                BuildContext _,
+                              ) {
+                                //print(categoryList);
+                                return addTransactionWidget(
+                                    context, addTransaction, categoryList, _);
+                              });
+                        },
+                      ),
+                      ListTile(
+                        leading: Icon(Icons.add, color: Colors.grey[300]),
+                        onTap: () {
+                          Navigator.of(context).pop();
+                          showDialog(
+                              context: context,
+                              builder: (
+                                BuildContext _,
+                              ) {
+                                return addCategoryWidget(
+                                    context, addCategory, _);
+                              });
+                        },
+                        title: Text(
+                          'Add Category',
+                          style: TextStyle(fontSize: 18.0, color: Colors.white),
+                        ),
+                      ),
+                      ListTile(
+                        leading:
+                            Icon(Icons.select_all, color: Colors.grey[300]),
+                        onTap: () {
+                          Navigator.of(context).pop();
+                          showDialog(
+                              context: context,
+                              builder: (
+                                BuildContext _,
+                              ) {
+                                return selectCategoryWidget(
+                                    context,
+                                    categoryList,
+                                    transactionBloc.selectedCategory,
+                                    height,
+                                    width,
+                                    selectCategory);
+                              });
+                        },
+                        title: Text(
+                          'Select Category',
+                          style: TextStyle(fontSize: 18.0, color: Colors.white),
+                        ),
+                      ),
+                      ListTile(
+                        leading:
+                            Icon(Icons.delete_sharp, color: Colors.grey[300]),
+                        onTap: () {
+                          Navigator.of(context).pop();
+                          transactionBloc.add(DeleteAllTransactions());
+                        },
+                        title: Text(
+                          'Delete All',
+                          style: TextStyle(fontSize: 18.0, color: Colors.white),
+                        ),
+                      ),
+                      ListTile(
+                        leading:
+                            Icon(Icons.login_rounded, color: Colors.grey[300]),
+                        title: Text(
+                          'SignOut',
+                          style: TextStyle(fontSize: 18.0, color: Colors.white),
+                        ),
+                        onTap: () {
+                          Navigator.of(context).pop();
+                          userRepository.signOut().then((value) {
+                            userCubit.changeUID(null);
+                          });
+                        },
+                      )
+                    ],
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
         appBar: AppBar(
+          backgroundColor: Colors.teal[300],
           title: Text('Home'),
           actions: [
             IconButton(
@@ -133,6 +202,22 @@ class HomeScreen extends StatelessWidget {
               builder: (context, state) {
             double netExpense = 0.0;
             double netIncome = 0.0;
+            if (transactionBloc.transactionList.length == 0) {
+              return Container(
+                height: MediaQuery.of(context).size.height,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Image.asset('images/startapp.png'),
+                    Text(
+                      'Start Adding Transactions!',
+                      style: TextStyle(
+                          fontSize: 30.0, fontWeight: FontWeight.bold),
+                    ),
+                  ],
+                ),
+              );
+            }
             if (transactionBloc.transactionList.length != 0) {
               transactionBloc.transactionList.forEach((element) {
                 if (element.expense) {
@@ -157,9 +242,10 @@ class HomeScreen extends StatelessWidget {
                             transactionBloc.selectedCategory ==
                                 "All Categories") {
                           return Padding(
-                            padding: const EdgeInsets.all(8.0),
+                            padding: const EdgeInsets.symmetric(
+                                vertical: 0.0, horizontal: 5.0),
                             child: Container(
-                              height: height * 0.13,
+                              height: height * 0.2,
                               child: Row(
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceEvenly,
@@ -171,7 +257,7 @@ class HomeScreen extends StatelessWidget {
                                     ),
                                   ),
                                   Container(
-                                      width: width * 0.6,
+                                      width: width * 0.5,
                                       child: Column(
                                         mainAxisAlignment:
                                             MainAxisAlignment.center,
@@ -188,7 +274,7 @@ class HomeScreen extends StatelessWidget {
                                                 fontWeight: FontWeight.w800),
                                           ),
                                           SizedBox(
-                                            height: height * 0.006,
+                                            height: height * 0.01,
                                           ),
                                           Text(
                                               "Description: " +
@@ -215,13 +301,13 @@ class HomeScreen extends StatelessWidget {
                                         ],
                                       )),
                                   Container(
-                                    width: width * 0.2,
+                                    width: width * 0.3,
                                     child: Column(
                                       mainAxisAlignment:
                                           MainAxisAlignment.center,
                                       children: [
                                         SizedBox(
-                                          height: height * 0.02,
+                                          height: height * 0.03,
                                         ),
                                         Text(
                                           "\u20B9 " +
@@ -232,10 +318,15 @@ class HomeScreen extends StatelessWidget {
                                             fontSize: 17.0,
                                             fontWeight: FontWeight.bold,
                                             color: transactionBloc
-                                                    .transactionList[index]
-                                                    .expense
-                                                ? Colors.red
-                                                : Colors.green,
+                                                        .transactionList[index]
+                                                        .amount ==
+                                                    0.0
+                                                ? Colors.blue
+                                                : transactionBloc
+                                                        .transactionList[index]
+                                                        .expense
+                                                    ? Colors.red
+                                                    : Colors.green,
                                           ),
                                         ),
                                         IconButton(
@@ -246,6 +337,24 @@ class HomeScreen extends StatelessWidget {
                                           },
                                           icon: Icon(Icons.delete),
                                         ),
+                                        Text('Date: ' +
+                                            transactionBloc
+                                                .transactionList[index]
+                                                .dateTime
+                                                .day
+                                                .toString() +
+                                            '-' +
+                                            transactionBloc
+                                                .transactionList[index]
+                                                .dateTime
+                                                .month
+                                                .toString() +
+                                            '-' +
+                                            transactionBloc
+                                                .transactionList[index]
+                                                .dateTime
+                                                .year
+                                                .toString())
                                       ],
                                     ),
                                   ),
@@ -260,6 +369,7 @@ class HomeScreen extends StatelessWidget {
                     ),
                   ),
                   Container(
+                    padding: EdgeInsets.fromLTRB(0.0, 16.0, 0.0, 17.0),
                     child: Row(
                       mainAxisSize: MainAxisSize.max,
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -268,17 +378,17 @@ class HomeScreen extends StatelessWidget {
                           "Net Expense: \u20B9 $netExpense",
                           softWrap: true,
                           style: TextStyle(
-                            color: Colors.red[800],
-                            fontSize: 18,
-                          ),
+                              color: Colors.red,
+                              fontSize: 18,
+                              fontWeight: FontWeight.bold),
                         ),
                         Text(
                           "Net Income: \u20B9 $netIncome",
                           softWrap: true,
                           style: TextStyle(
-                            color: Colors.green[800],
+                            color: Colors.green,
                             fontSize: 18,
-                            fontWeight: FontWeight.w600,
+                            fontWeight: FontWeight.bold,
                           ),
                         ),
                       ],

@@ -36,107 +36,144 @@ class AuthBuilder extends StatelessWidget {
         child: Scaffold(
           body: SingleChildScrollView(
             child: Container(
-              color: Colors.blue[100],
+              color: Colors.redAccent,
               height: MediaQuery.of(context).size.height,
               width: MediaQuery.of(context).size.width,
-              child: Padding(
-                padding: const EdgeInsets.symmetric(
-                    vertical: 20.0, horizontal: 25.0),
-                child: Column(
-                  mainAxisSize: MainAxisSize.max,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      context.read<AuthBloc>().isLogin
-                          ? 'Login to Money Mangement App!'
-                          : 'Register to Money Mangement App!',
-                      style: TextStyle(
-                          fontSize: 35.0,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.blue[900]),
+              child: Column(
+                mainAxisSize: MainAxisSize.max,
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  Container(
+                    width: MediaQuery.of(context).size.width,
+                    padding: EdgeInsets.fromLTRB(0.0, 70.0, 0.0, 50.0),
+                    child: Column(
+                      children: [
+                        Text(
+                          authBloc.isLogin ? 'Login ' : 'Register ',
+                          style: TextStyle(
+                              fontSize: 28.0,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.white),
+                        ),
+                        SizedBox(
+                          height: 5.0,
+                        ),
+                        Text(
+                          'Money Mangement App!',
+                          style: TextStyle(
+                              fontSize: 24.0,
+                              fontWeight: FontWeight.w600,
+                              color: Colors.white),
+                        ),
+                      ],
                     ),
-                    SizedBox(
-                      height: 50.0,
-                    ),
-                    TextFormField(
-                        controller: email,
-                        decoration: textFormFieldDecoration.copyWith(
-                            hintText: 'Email',
-                            labelText: 'Email',
-                            prefixIcon: Icon(Icons.email)),
-                        validator: (val) {},
-                        onChanged: (val) {
-                          authBloc.add(EmailModified(email: val.trim()));
-                        }),
-                    SizedBox(
-                      height: 5.0,
-                    ),
-                    state is AppStarted
-                        ? Container()
-                        : Text(
-                            context.read<AuthBloc>().isValidEmail
-                                ? ""
-                                : "Invalid Email",
-                            style: TextStyle(color: Colors.red),
-                          ),
-                    SizedBox(
-                      height: 30.0,
-                    ),
-                    TextFormField(
-                        obscureText: true,
-                        controller: password,
-                        decoration: textFormFieldDecoration.copyWith(
-                            hintText: 'Password',
-                            labelText: 'Password',
-                            prefixIcon: Icon(Icons.lock)),
-                        validator: (val) {},
-                        onChanged: (val) {
-                          authBloc.add(PasswordModified(password: val.trim()));
-                        }),
-                    SizedBox(
-                      height: 10.0,
-                    ),
-                    state is AppStarted
-                        ? Container()
-                        : Text(
-                            context.read<AuthBloc>().isValidPassword
-                                ? ""
-                                : "Invalid Password",
-                            style: TextStyle(color: Colors.red)),
-                    SizedBox(
-                      height: 20.0,
-                    ),
-                    MaterialButton(
-                      color: Colors.blueAccent,
-                      child: button(context.read<AuthBloc>().isLogin
-                          ? 'Login'
-                          : 'Register'),
-                      onPressed: () {
-                        if (context.read<AuthBloc>().isLogin == true) {
-                          authBloc.add(LoginSubmit());
-                        } else {
-                          authBloc.add(RegisterSubmit());
-                        }
-                      },
-                    ),
-                    SizedBox(
-                      height: 30.0,
-                    ),
-                    context.read<AuthBloc>().isLoading
-                        ? CircularProgressIndicator()
-                        : MaterialButton(
-                            child: Text(
-                              context.read<AuthBloc>().isLogin
-                                  ? "New User? Register Here."
-                                  : "Existing user? Login Here.",
-                              style: TextStyle(fontSize: 20.0),
+                  ),
+                  Container(
+                    margin: EdgeInsets.fromLTRB(15.0, 0.0, 15.0, 0.0),
+                    decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.only(
+                            topLeft: Radius.circular(20.0),
+                            topRight: Radius.circular(20.0),
+                            bottomLeft: Radius.circular(20.0),
+                            bottomRight: Radius.circular(20.0))),
+                    padding: EdgeInsets.fromLTRB(24.0, 20.0, 24.0, 50.0),
+                    child: Column(
+                      children: [
+                        SizedBox(
+                          height: 50.0,
+                        ),
+                        TextFormField(
+                            controller: email,
+                            decoration: textFormFieldDecoration.copyWith(
+                                hintText: 'Email',
+                                labelText: 'Email',
+                                prefixIcon: Icon(Icons.email)),
+                            validator: (val) {},
+                            onChanged: (val) {
+                              authBloc.add(EmailModified(email: val.trim()));
+                            }),
+                        SizedBox(
+                          height: 5.0,
+                        ),
+                        state is AppStarted
+                            ? Container()
+                            : Text(
+                                authBloc.isValidEmail ? "" : "Invalid Email",
+                                style: TextStyle(color: Colors.red[900]),
+                              ),
+                        SizedBox(
+                          height: 30.0,
+                        ),
+                        TextFormField(
+                            obscureText: true,
+                            controller: password,
+                            decoration: textFormFieldDecoration.copyWith(
+                                hintText: 'Password',
+                                labelText: 'Password',
+                                prefixIcon: Icon(Icons.lock)),
+                            validator: (val) {},
+                            onChanged: (val) {
+                              authBloc
+                                  .add(PasswordModified(password: val.trim()));
+                            }),
+                        SizedBox(
+                          height: 10.0,
+                        ),
+                        state is AppStarted
+                            ? Container()
+                            : Text(
+                                authBloc.isValidPassword
+                                    ? ""
+                                    : "Password must consist of atleast 8 characters.",
+                                style: TextStyle(color: Colors.red[900])),
+                        SizedBox(
+                          height: 35.0,
+                        ),
+                        Container(
+                          clipBehavior: Clip.hardEdge,
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(10)),
+                          child: MaterialButton(
+                            color: Colors.tealAccent[700],
+                            elevation: 0.0,
+                            child: Padding(
+                              padding: const EdgeInsets.symmetric(
+                                  vertical: 5.0, horizontal: 30.0),
+                              child: button(context.read<AuthBloc>().isLogin
+                                  ? 'Login'
+                                  : 'Register'),
                             ),
                             onPressed: () {
-                              authBloc.add(ToggleIsLogin());
+                              if (context.read<AuthBloc>().isLogin == true) {
+                                authBloc.add(LoginSubmit());
+                              } else {
+                                authBloc.add(RegisterSubmit());
+                              }
                             },
-                          )
-                  ],
-                ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  SizedBox(
+                    height: 17.0,
+                  ),
+                  authBloc.isLoading
+                      ? CircularProgressIndicator()
+                      : MaterialButton(
+                          child: Text(
+                            context.read<AuthBloc>().isLogin
+                                ? "New User? Register Here."
+                                : "Existing user? Login Here.",
+                            style:
+                                TextStyle(fontSize: 20.0, color: Colors.white),
+                          ),
+                          onPressed: () {
+                            authBloc.add(ToggleIsLogin());
+                          },
+                        )
+                ],
               ),
             ),
           ),

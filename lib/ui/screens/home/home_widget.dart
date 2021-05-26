@@ -43,6 +43,7 @@ Widget addTransactionWidget(BuildContext currContext, Function addEvent,
     category: 'Category',
     amount: 0.0,
     expense: false,
+    dateTime: DateTime.now(),
   );
   return BlocProvider.value(
     value: BlocProvider.of<TransactionBloc>(currContext),
@@ -63,6 +64,13 @@ Widget addTransactionWidget(BuildContext currContext, Function addEvent,
                 input.description = val;
               },
             ),
+            TextField(
+              keyboardType: TextInputType.number,
+              decoration: InputDecoration(hintText: 'Amount'),
+              onChanged: (val) {
+                input.amount = double.parse(val);
+              },
+            ),
             DropdownButtonFormField<String>(
               hint: Text('Select Category'),
               items: categoryList.map((c) {
@@ -76,17 +84,22 @@ Widget addTransactionWidget(BuildContext currContext, Function addEvent,
                 input.category = val ?? "Category";
               },
             ),
-            TextField(
-              keyboardType: TextInputType.number,
-              decoration: InputDecoration(hintText: 'Enter Amount'),
-              onChanged: (val) {
-                input.amount = double.parse(val);
+            SizedBox(
+              height: 10.0,
+            ),
+            DateTimepicker(
+              function: (DateTime time) {
+                input.dateTime = time;
               },
             ),
           ],
         ),
       ),
       actions: [
+        Text(
+          'Add as: ',
+          style: TextStyle(fontSize: 15.0, fontWeight: FontWeight.bold),
+        ),
         MaterialButton(
           onPressed: () {
             Navigator.of(widgetContext).pop();
@@ -141,4 +154,48 @@ Widget selectCategoryWidget(BuildContext currContext, List<String> categoryList,
     ),
     scrollable: true,
   );
+}
+
+class DateTimepicker extends StatefulWidget {
+  final Function function;
+  DateTimepicker({required this.function});
+  @override
+  _DateTimepickerState createState() => _DateTimepickerState();
+}
+
+class _DateTimepickerState extends State<DateTimepicker> {
+  DateTime input = DateTime.now();
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      children: [
+        IconButton(
+          icon: Icon(Icons.calendar_today_outlined),
+          onPressed: () {
+            showDatePicker(
+                    context: context,
+                    initialDate: DateTime.now(),
+                    firstDate: DateTime(2000),
+                    lastDate: DateTime(2022))
+                .then((date) {
+              print(date);
+              setState(() {
+                input = date ?? DateTime.now();
+                widget.function(input);
+              });
+            });
+          },
+        ),
+        Text(
+          input.day.toString() +
+              '-' +
+              input.month.toString() +
+              '-' +
+              input.year.toString(),
+          style: TextStyle(fontSize: 18.0),
+        )
+      ],
+    );
+  }
 }

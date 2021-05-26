@@ -30,8 +30,6 @@ dependencies:
 
   keyboard_dismisser: ^2.0.0
 
-  
-
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -45,9 +43,8 @@ flutter:
   uses-material-design: true
 
   # To add assets to your application, add an assets section, like this:
-  # assets:
-  #   - assets/images/
-  #   - assets/icons/
+  assets:
+    - images/
 
   
   # fonts:
