@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:money_manage_project/logic/bloc/transaction/transaction_bloc.dart';
@@ -231,8 +233,22 @@ class HomeScreen extends StatelessWidget {
             } else if (state is TransactionState) {
               return Column(
                 children: [
+                  Padding(
+                      padding: EdgeInsets.all(10.0),
+                      child: transactionBloc.selectedCategory ==
+                              "All Categories"
+                          ? Text(
+                              'All Transactions',
+                              style: TextStyle(
+                                  fontSize: 20, fontWeight: FontWeight.bold),
+                            )
+                          : Text(
+                              'Category: ' + transactionBloc.selectedCategory,
+                              style: TextStyle(
+                                  fontSize: 20, fontWeight: FontWeight.bold),
+                            )),
                   Container(
-                    height: height * 0.8,
+                    height: height * 0.73,
                     child: ListView.builder(
                       itemBuilder: (context, index) {
                         print(
@@ -369,6 +385,7 @@ class HomeScreen extends StatelessWidget {
                     ),
                   ),
                   Container(
+                    height: height * 0.1,
                     padding: EdgeInsets.fromLTRB(0.0, 16.0, 0.0, 17.0),
                     child: Row(
                       mainAxisSize: MainAxisSize.max,
