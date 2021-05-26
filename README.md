@@ -36,7 +36,7 @@ A Flutter project.
 * Hive Reference: https://www.youtube.com/watch?v=R1GSrrItqUs&t=1522s
 
 ## Screenshots / Recording of the app
-Screenshots are included in folder named as "screenshots".
+Screenshots, Recording, apk are included in folder named as "screenshots".
 
 ## Operating System used
 OS: Windows
