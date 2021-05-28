@@ -1,0 +1,3 @@
+class StatisticsState{}
+
+class BarGraphState{}

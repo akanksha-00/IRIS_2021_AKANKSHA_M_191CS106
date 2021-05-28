@@ -9,6 +9,7 @@ import 'package:money_manage_project/logic/cubit/user_cubit.dart';
 import 'package:money_manage_project/logic/repository/transaction_repository.dart';
 import 'package:money_manage_project/logic/repository/user_repository.dart';
 import 'package:money_manage_project/models/transaction.dart';
+import 'package:money_manage_project/ui/screens/statistics/statistics_screen.dart';
 import 'home_widget.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -161,6 +162,22 @@ class HomeScreen extends StatelessWidget {
                         },
                         title: Text(
                           'Delete All',
+                          style: TextStyle(fontSize: 18.0, color: Colors.white),
+                        ),
+                      ),
+                      ListTile(
+                        leading: Icon(Icons.bar_chart, color: Colors.grey[300]),
+                        onTap: () {
+                          Navigator.of(context).pop();
+                          Navigator.of(context).push(MaterialPageRoute(
+                              builder: (context) => StatisticsScreen(
+                                    transactionList:
+                                        transactionBloc.transactionList,
+                                    categoryList: transactionBloc.categoryList,
+                                  )));
+                        },
+                        title: Text(
+                          'Show Statistics',
                           style: TextStyle(fontSize: 18.0, color: Colors.white),
                         ),
                       ),

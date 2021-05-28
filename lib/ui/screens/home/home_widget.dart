@@ -72,7 +72,9 @@ Widget addTransactionWidget(BuildContext currContext, Function addEvent,
               },
             ),
             DropdownButtonFormField<String>(
-              hint: Text('Select Category'),
+              hint: Text(categoryList.length == 0
+                  ? 'No category added'
+                  : 'Select Category'),
               items: categoryList.map((c) {
                 print(c);
                 return DropdownMenuItem(

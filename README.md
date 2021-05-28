@@ -17,19 +17,20 @@ A Flutter project.
 6. Add category
 7. Sort transactions as per category
 8. View net expense/income (responsive as per sorting via categories)
+9. Monthly expense/income bar graph
+10. Piechart for income and expense based on categories
 
 ## List of non-implemented/planned features
 * Non-implemented features
-    1. Statistics based on daily/monthly/yearly transactions
+    1. Statistics based on daily/yearly basis
     2. Implemented a basic UI without creative design
 * Planned features
     1. Feature to edit transaction details
-    2. Visulalization using graphs
+    2. In depth visualization of data
     3. Improving UI/UX of the application
 
 ## List of known bugs
 1. Renderflow may occur in few devices
-
 
 ## References used
 * Bloc Reference: https://www.youtube.com/watch?v=w6XWjpBK4W8&list=PLptHs0ZDJKt_T-oNj_6Q98v-tBnVf-S_o

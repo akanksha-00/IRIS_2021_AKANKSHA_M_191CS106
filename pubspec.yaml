@@ -29,6 +29,7 @@ dependencies:
   firebase_core: ^1.2.0
 
   keyboard_dismisser: ^2.0.0
+  fl_chart: ^0.36.1
 
 dev_dependencies:
   flutter_test:
